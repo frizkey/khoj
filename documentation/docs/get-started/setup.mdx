@@ -101,7 +101,46 @@ Restart your Khoj server after the first run to ensure all settings are applied 
       </TabItem>
     </Tabs>
 
+    #### Configure Khoj via environment variables
 
+    The default `docker-compose.yml` works out of the box.
+    You can also override important settings via environment variables or a `.env` file in the same directory.
+
+    **Database**
+
+    - `POSTGRES_DB` (default: `postgres`)
+    - `POSTGRES_USER` (default: `postgres`)
+    - `POSTGRES_PASSWORD` (default: `postgres`)
+    - `POSTGRES_HOST` (default: `database`)
+    - `POSTGRES_PORT` (default: `5432`)
+
+    **Application secrets and admin user**
+
+    - `KHOJ_DJANGO_SECRET_KEY` (default: `secret`)
+    - `KHOJ_ADMIN_EMAIL` (default: `username@example.com`)
+    - `KHOJ_ADMIN_PASSWORD` (default: `password`)
+
+    Use strong, unique values for any non-local environment.
+
+    **Sandboxes, search and providers**
+
+    - `KHOJ_TERRARIUM_URL` (default: `http://sandbox:8080`)
+    - `KHOJ_SEARXNG_URL` (default: `http://search:8080`)
+    - Optional LLM providers: `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `KHOJ_DEFAULT_CHAT_MODEL`, `GEMINI_API_KEY`, `ANTHROPIC_API_KEY`
+    - Optional web search/read: `SERPER_DEV_API_KEY`, `OLOSTEP_API_KEY`, `FIRECRAWL_API_KEY`, `EXA_API_KEY`
+
+    **Domains, HTTPS and telemetry (optional)**
+
+    - `KHOJ_NO_HTTPS`
+    - `KHOJ_DOMAIN`
+    - `KHOJ_ALLOWED_DOMAIN`
+    - `KHOJ_TELEMETRY_DISABLE`
+
+    Create a `.env` file alongside `docker-compose.yml`, add any variables you want to override, and then run:
+
+    ```bash
+    docker compose up -d
+    ```
 
 :::info[Remote Access]
 By default Khoj is only accessible on the machine it is running. To access Khoj from a remote machine see [Remote Access Docs](/advanced/remote).
